@@ -232,13 +232,13 @@ phases:
        mkdir -p $BUILD_STAGINGDIRECTORY/github/ >/dev/null 2>&1
        curl -sL https://github.com/Azure/azure-cli/archive/$TAR_NAME -o $BUILD_STAGINGDIRECTORY/github/$TAR_NAME
 
-      # az storage blob upload -c $CONTAINER_NAME -n $TAR_NAME -f $BUILD_STAGINGDIRECTORY/github/$TAR_NAME
+       # az storage blob upload -c $CONTAINER_NAME -n $TAR_NAME -f $BUILD_STAGINGDIRECTORY/github/$TAR_NAME
 
        # Make sure the URL is publicly available
-       #HOMEBREW_UPSTREAM_URL=$(az storage blob url -c $CONTAINER_NAME -n $TAR_NAME -otsv)
+       # HOMEBREW_UPSTREAM_URL=$(az storage blob url -c $CONTAINER_NAME -n $TAR_NAME -otsv)
 
-      # curl -sfS -I $HOMEBREW_UPSTREAM_URL >/dev/null
-      # echo -n $HOMEBREW_UPSTREAM_URL > $BUILD_STAGINGDIRECTORY/github/upstream_url
+       # curl -sfS -I $HOMEBREW_UPSTREAM_URL >/dev/null
+       # echo -n $HOMEBREW_UPSTREAM_URL > $BUILD_STAGINGDIRECTORY/github/upstream_url
     displayName: 'Upload Azure CLI Release Candidate Source For Homebrew'
     env:
       AZURE_STORAGE_KEY: $STAGING_ACCOUNT_KEY
@@ -249,7 +249,7 @@ phases:
 
        root=$(cd $(dirname $0); pwd)
 
-       set -ex
+       set -evx
 
        CLI_VERSION=`cat $SYSTEM_ARTIFACTSDIRECTORY/metadata/version`
        HOMEBREW_UPSTREAM_URL=`cat $BUILD_STAGINGDIRECTORY/github/upstream_url`
